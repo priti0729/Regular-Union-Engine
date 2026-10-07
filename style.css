@@ -1,0 +1,892 @@
+/* =====================================================
+   REGULAR UNION ENGINE
+   STYLE SHEET
+   ===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #172033;
+    line-height: 1.6;
+}
+
+
+/* ================= HEADER ================= */
+
+.header {
+    background: linear-gradient(135deg, #172554, #2563eb);
+    color: white;
+    padding: 45px 20px;
+}
+
+
+.header-content {
+    max-width: 1200px;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+.tag {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    opacity: 0.8;
+    margin-bottom: 8px;
+}
+
+
+.header h1 {
+    font-size: 42px;
+    margin-bottom: 8px;
+}
+
+
+.subtitle {
+    font-size: 17px;
+    opacity: 0.92;
+}
+
+
+.header-badge {
+    padding: 15px 22px;
+
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.12);
+
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+
+/* ================= MAIN CONTAINER ================= */
+
+.container {
+    width: min(1200px, 94%);
+    margin: 35px auto;
+}
+
+
+/* ================= INTRO ================= */
+
+.intro-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+
+    margin-bottom: 35px;
+}
+
+
+.intro-card h2 {
+    margin-bottom: 10px;
+}
+
+
+.formula-box {
+    margin-top: 25px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+
+.formula-box div {
+    background: #eff6ff;
+
+    padding: 18px;
+
+    border-radius: 12px;
+
+    border-left: 4px solid #2563eb;
+}
+
+
+.formula-box span {
+    display: block;
+
+    font-size: 12px;
+    text-transform: uppercase;
+
+    color: #64748b;
+
+    margin-bottom: 6px;
+}
+
+
+.formula-box strong {
+    color: #1e3a8a;
+}
+
+
+/* ================= SECTION HEADING ================= */
+
+.section-heading {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+
+.step-number {
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+
+.section-heading h2 {
+    margin-bottom: 5px;
+}
+
+
+.secondary-btn {
+    border: 1px solid #cbd5e1;
+
+    background: white;
+
+    padding: 12px 18px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    color: #334155;
+}
+
+
+.secondary-btn:hover {
+    background: #f8fafc;
+}
+
+
+/* ================= DFA CARDS ================= */
+
+.dfa-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 25px;
+}
+
+
+.dfa-card {
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 25px;
+
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+}
+
+
+.dfa-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+
+.dfa-icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    font-weight: bold;
+}
+
+
+.m1-icon {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+
+.m2-icon {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+
+.dfa-title h2 {
+    margin-bottom: 2px;
+}
+
+
+.dfa-title p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+label {
+    display: block;
+
+    font-weight: bold;
+
+    margin: 15px 0 7px;
+
+    color: #334155;
+}
+
+
+input,
+textarea {
+    width: 100%;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 9px;
+
+    padding: 12px 13px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+    background: #fbfdff;
+}
+
+
+input:focus,
+textarea:focus {
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+
+textarea {
+    resize: vertical;
+
+    min-height: 150px;
+
+    line-height: 1.6;
+}
+
+
+.input-help {
+    font-size: 12px;
+
+    color: #64748b;
+
+    margin-top: 6px;
+}
+
+
+code {
+    background: #f1f5f9;
+
+    padding: 2px 6px;
+
+    border-radius: 4px;
+
+    color: #334155;
+}
+
+
+/* ================= ACTION ================= */
+
+.action-section {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin: 35px 0;
+}
+
+
+.primary-btn {
+    border: none;
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 14px 25px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+
+.primary-btn:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+}
+
+
+.reset-btn {
+    border: 1px solid #cbd5e1;
+
+    background: white;
+
+    padding: 14px 22px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+.reset-btn:hover {
+    background: #f8fafc;
+}
+
+
+/* ================= ERROR ================= */
+
+.error-box {
+    background: #fef2f2;
+
+    border: 1px solid #fecaca;
+
+    color: #b91c1c;
+
+    padding: 15px 18px;
+
+    border-radius: 10px;
+
+    margin-bottom: 25px;
+}
+
+
+/* ================= RESULT CARDS ================= */
+
+.result-card {
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 28px;
+
+    margin-bottom: 25px;
+
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+}
+
+
+.section-label {
+    display: inline-block;
+
+    background: #eff6ff;
+
+    color: #1d4ed8;
+
+    padding: 5px 10px;
+
+    border-radius: 6px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 10px;
+}
+
+
+.result-card h2 {
+    margin-bottom: 7px;
+}
+
+
+.result-card > p {
+    color: #64748b;
+
+    margin-bottom: 20px;
+}
+
+
+.state-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+
+.state-chip {
+    background: #eef2ff;
+
+    border: 1px solid #c7d2fe;
+
+    color: #3730a3;
+
+    padding: 8px 13px;
+
+    border-radius: 8px;
+
+    font-family: monospace;
+
+    font-weight: bold;
+}
+
+
+.final-chip {
+    background: #dcfce7;
+
+    border-color: #86efac;
+
+    color: #166534;
+}
+
+
+.calculation-box {
+    margin-top: 20px;
+
+    background: #f8fafc;
+
+    border: 1px dashed #cbd5e1;
+
+    border-radius: 10px;
+
+    padding: 15px;
+
+    font-family: monospace;
+
+    color: #334155;
+}
+
+
+.logic-box {
+    background: #fff7ed;
+
+    border: 1px solid #fed7aa;
+
+    color: #9a3412;
+
+    padding: 17px;
+
+    border-radius: 10px;
+
+    font-family: monospace;
+
+    margin: 20px 0;
+}
+
+
+/* ================= TABLES ================= */
+
+.table-wrapper {
+    overflow-x: auto;
+
+    margin-top: 20px;
+}
+
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 650px;
+}
+
+
+th {
+    background: #172554;
+
+    color: white;
+
+    padding: 13px;
+
+    text-align: left;
+
+    font-size: 13px;
+}
+
+
+td {
+    padding: 12px 13px;
+
+    border-bottom: 1px solid #e2e8f0;
+
+    font-size: 14px;
+}
+
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+
+.product-transition {
+    font-weight: bold;
+
+    color: #1d4ed8;
+}
+
+
+.final-row {
+    background: #f0fdf4;
+}
+
+
+/* ================= UNION SUMMARY ================= */
+
+.union-summary {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 15px;
+
+    margin: 25px 0;
+}
+
+
+.union-summary div {
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    padding: 17px;
+
+    border-radius: 10px;
+}
+
+
+.union-summary span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    margin-bottom: 5px;
+}
+
+
+.union-summary strong {
+    font-size: 14px;
+
+    word-break: break-word;
+}
+
+
+.result-card h3 {
+    margin-top: 25px;
+
+    margin-bottom: 10px;
+}
+
+
+/* ================= DFA DIAGRAM ================= */
+
+.diagram-container {
+    margin-top: 20px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    padding: 15px;
+
+    overflow-x: auto;
+
+    min-height: 300px;
+}
+
+
+.diagram-container svg {
+    display: block;
+
+    margin: auto;
+}
+
+
+.diagram-node {
+    fill: white;
+
+    stroke: #2563eb;
+
+    stroke-width: 3;
+}
+
+
+.diagram-final {
+    stroke: #16a34a;
+
+    stroke-width: 5;
+}
+
+
+.diagram-label {
+    font-size: 13px;
+
+    font-weight: bold;
+
+    fill: #172033;
+}
+
+
+.diagram-edge {
+    stroke: #64748b;
+
+    stroke-width: 2;
+
+    fill: none;
+}
+
+
+.diagram-edge-label {
+    font-size: 12px;
+
+    font-weight: bold;
+
+    fill: #334155;
+}
+
+
+/* ================= SIMULATOR ================= */
+
+.simulator-card {
+    border-top: 5px solid #2563eb;
+}
+
+
+.simulator-input {
+    display: flex;
+
+    gap: 12px;
+
+    margin: 25px 0;
+}
+
+
+.simulator-input input {
+    flex: 1;
+}
+
+
+.simulation-path {
+    background: #172554;
+
+    color: white;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    margin-top: 20px;
+
+    overflow-x: auto;
+
+    font-family: monospace;
+
+    line-height: 2;
+}
+
+
+.path-state {
+    color: #93c5fd;
+
+    font-weight: bold;
+}
+
+
+.path-arrow {
+    color: white;
+
+    margin: 0 7px;
+}
+
+
+.result-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+
+.result-box {
+    padding: 20px;
+
+    border-radius: 10px;
+
+    border: 1px solid #e2e8f0;
+
+    background: #f8fafc;
+
+    text-align: center;
+
+    font-weight: bold;
+}
+
+
+.accept-box {
+    background: #f0fdf4;
+
+    border-color: #86efac;
+
+    color: #166534;
+}
+
+
+.reject-box {
+    background: #fef2f2;
+
+    border-color: #fecaca;
+
+    color: #b91c1c;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+    background: #172554;
+
+    color: #cbd5e1;
+
+    text-align: center;
+
+    padding: 30px 20px;
+
+    margin-top: 50px;
+
+    font-size: 13px;
+}
+
+
+footer p:first-child {
+    color: white;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+
+/* ================= UTILITY ================= */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 850px) {
+
+    .header-content {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .header h1 {
+        font-size: 32px;
+    }
+
+
+    .dfa-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .formula-box {
+        grid-template-columns: 1fr;
+    }
+
+
+    .union-summary {
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .section-heading {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .union-summary {
+        grid-template-columns: 1fr;
+    }
+
+
+    .action-section {
+        flex-direction: column;
+    }
+
+
+    .simulator-input {
+        flex-direction: column;
+    }
+
+}
+
+

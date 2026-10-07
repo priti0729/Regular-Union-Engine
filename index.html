@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Regular Union Engine</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <p class="tag">THEORY OF COMPUTATION • TAE</p>
+
+                <h1>Regular Union Engine</h1>
+
+                <p class="subtitle">
+                    Cross-Product DFA for
+                    <strong>L(M1) ∪ L(M2)</strong>
+                    using Parallel State Transitions
+                </p>
+            </div>
+
+            <div class="header-badge">
+                DFA UNION
+            </div>
+        </div>
+    </header>
+
+
+    <main class="container">
+
+        <!-- ================= INTRODUCTION ================= -->
+
+        <section class="intro-card">
+            <h2>How This Engine Works</h2>
+
+            <p>
+                This application computes the union of two regular languages
+                represented by DFA M1 and DFA M2.
+                It creates a cross-product DFA by processing the same input
+                symbol in both DFAs simultaneously.
+            </p>
+
+            <div class="formula-box">
+
+                <div>
+                    <span>Cross Product</span>
+                    <strong>Q = Q₁ × Q₂</strong>
+                </div>
+
+                <div>
+                    <span>Parallel Transition</span>
+                    <strong>δ((q,p),a) = (δ₁(q,a), δ₂(p,a))</strong>
+                </div>
+
+                <div>
+                    <span>Union Acceptance</span>
+                    <strong>q ∈ F₁ OR p ∈ F₂</strong>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ================= INPUT SECTION ================= -->
+
+        <section class="section-heading">
+
+            <div>
+                <p class="step-number">STEP 01</p>
+                <h2>Enter the Two DFAs</h2>
+                <p>
+                    Enter the states, alphabet, start state, final states and
+                    transition rules of both DFAs.
+                </p>
+            </div>
+
+            <button id="loadExampleBtn" class="secondary-btn">
+                Load Example
+            </button>
+
+        </section>
+
+
+        <div class="dfa-grid">
+
+            <!-- ================= DFA M1 ================= -->
+
+            <section class="dfa-card">
+
+                <div class="dfa-title">
+                    <div class="dfa-icon m1-icon">M1</div>
+
+                    <div>
+                        <h2>DFA M1</h2>
+                        <p>First Regular Language</p>
+                    </div>
+                </div>
+
+
+                <label for="m1States">
+                    States
+                </label>
+
+                <input
+                    type="text"
+                    id="m1States"
+                    placeholder="Example: q0,q1"
+                >
+
+
+                <label for="m1Alphabet">
+                    Alphabet
+                </label>
+
+                <input
+                    type="text"
+                    id="m1Alphabet"
+                    placeholder="Example: 0,1"
+                >
+
+
+                <label for="m1Start">
+                    Start State
+                </label>
+
+                <input
+                    type="text"
+                    id="m1Start"
+                    placeholder="Example: q0"
+                >
+
+
+                <label for="m1Final">
+                    Final States
+                </label>
+
+                <input
+                    type="text"
+                    id="m1Final"
+                    placeholder="Example: q1"
+                >
+
+
+                <label for="m1Transitions">
+                    Transition Table
+                </label>
+
+                <textarea
+                    id="m1Transitions"
+                    rows="8"
+                    placeholder="Enter one transition per line:
+
+q0,0,q0
+q0,1,q1
+q1,0,q0
+q1,1,q1"
+                ></textarea>
+
+                <p class="input-help">
+                    Format:
+                    <code>currentState,inputSymbol,nextState</code>
+                </p>
+
+            </section>
+
+
+            <!-- ================= DFA M2 ================= -->
+
+            <section class="dfa-card">
+
+                <div class="dfa-title">
+                    <div class="dfa-icon m2-icon">M2</div>
+
+                    <div>
+                        <h2>DFA M2</h2>
+                        <p>Second Regular Language</p>
+                    </div>
+                </div>
+
+
+                <label for="m2States">
+                    States
+                </label>
+
+                <input
+                    type="text"
+                    id="m2States"
+                    placeholder="Example: p0,p1"
+                >
+
+
+                <label for="m2Alphabet">
+                    Alphabet
+                </label>
+
+                <input
+                    type="text"
+                    id="m2Alphabet"
+                    placeholder="Example: 0,1"
+                >
+
+
+                <label for="m2Start">
+                    Start State
+                </label>
+
+                <input
+                    type="text"
+                    id="m2Start"
+                    placeholder="Example: p0"
+                >
+
+
+                <label for="m2Final">
+                    Final States
+                </label>
+
+                <input
+                    type="text"
+                    id="m2Final"
+                    placeholder="Example: p1"
+                >
+
+
+                <label for="m2Transitions">
+                    Transition Table
+                </label>
+
+                <textarea
+                    id="m2Transitions"
+                    rows="8"
+                    placeholder="Enter one transition per line:
+
+p0,0,p1
+p0,1,p0
+p1,0,p1
+p1,1,p0"
+                ></textarea>
+
+                <p class="input-help">
+                    Format:
+                    <code>currentState,inputSymbol,nextState</code>
+                </p>
+
+            </section>
+
+        </div>
+
+
+        <!-- ================= GENERATE BUTTON ================= -->
+
+        <section class="action-section">
+
+            <button id="generateBtn" class="primary-btn">
+                ⚡ Generate Union DFA
+            </button>
+
+            <button id="resetBtn" class="reset-btn">
+                Reset
+            </button>
+
+        </section>
+
+
+        <!-- ================= ERROR ================= -->
+
+        <div id="errorBox" class="error-box hidden"></div>
+
+
+        <!-- ================= RESULT ================= -->
+
+        <section id="resultSection" class="hidden">
+
+            <!-- ================= STEP 02 ================= -->
+
+            <section class="result-card">
+
+                <div class="section-label">
+                    STEP 02
+                </div>
+
+                <h2>Cross-Product States</h2>
+
+                <p>
+                    The states of the new DFA are generated using
+                    <strong>Q₁ × Q₂</strong>.
+                    Each new state contains one state from M1 and one state
+                    from M2.
+                </p>
+
+                <div id="productStates" class="state-list"></div>
+
+                <div class="calculation-box" id="productCalculation"></div>
+
+            </section>
+
+
+            <!-- ================= STEP 03 ================= -->
+
+            <section class="result-card">
+
+                <div class="section-label">
+                    STEP 03
+                </div>
+
+                <h2>Parallel State Transitions</h2>
+
+                <p>
+                    For every input symbol, both DFAs process the symbol
+                    simultaneously. The resulting pair becomes the next
+                    state of the union DFA.
+                </p>
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Current State</th>
+                                <th>Input</th>
+                                <th>M1 Transition</th>
+                                <th>M2 Transition</th>
+                                <th>Combined Transition</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="parallelTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= STEP 04 ================= -->
+
+            <section class="result-card">
+
+                <div class="section-label">
+                    STEP 04
+                </div>
+
+                <h2>Union Final States</h2>
+
+                <p>
+                    A product state is final if the M1 state is final
+                    <strong>OR</strong> the M2 state is final.
+                </p>
+
+                <div class="logic-box">
+
+                    <strong>
+                        F = {(q,p) | q ∈ F₁ OR p ∈ F₂}
+                    </strong>
+
+                </div>
+
+                <div id="finalStates" class="state-list"></div>
+
+            </section>
+
+
+            <!-- ================= STEP 05 ================= -->
+
+            <section class="result-card">
+
+                <div class="section-label">
+                    STEP 05
+                </div>
+
+                <h2>Generated Union DFA</h2>
+
+                <p>
+                    The complete cross-product DFA is shown below.
+                </p>
+
+
+                <div class="union-summary">
+
+                    <div>
+                        <span>States</span>
+                        <strong id="summaryStates">-</strong>
+                    </div>
+
+                    <div>
+                        <span>Alphabet</span>
+                        <strong id="summaryAlphabet">-</strong>
+                    </div>
+
+                    <div>
+                        <span>Start State</span>
+                        <strong id="summaryStart">-</strong>
+                    </div>
+
+                    <div>
+                        <span>Final States</span>
+                        <strong id="summaryFinal">-</strong>
+                    </div>
+
+                </div>
+
+
+                <h3>Union DFA Transition Table</h3>
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead id="unionTableHead"></thead>
+
+                        <tbody id="unionTableBody"></tbody>
+
+                    </table>
+
+                </div>
+
+
+                <h3>DFA State Diagram</h3>
+
+                <div id="dfaDiagram" class="diagram-container">
+                </div>
+
+            </section>
+
+
+            <!-- ================= STEP 06 ================= -->
+
+            <section class="result-card simulator-card">
+
+                <div class="section-label">
+                    STEP 06
+                </div>
+
+                <h2>String Simulator</h2>
+
+                <p>
+                    Enter a string to observe how M1 and M2 process the input
+                    in parallel and how the union DFA reaches its final state.
+                </p>
+
+
+                <div class="simulator-input">
+
+                    <input
+                        type="text"
+                        id="testString"
+                        placeholder="Example: 10101"
+                    >
+
+                    <button id="simulateBtn" class="primary-btn">
+                        Simulate String
+                    </button>
+
+                </div>
+
+
+                <div id="simulationResult" class="hidden">
+
+                    <h3>Step-by-Step Execution</h3>
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Step</th>
+                                    <th>Input Symbol</th>
+                                    <th>M1 State</th>
+                                    <th>M2 State</th>
+                                    <th>Product State</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="simulationTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <div id="simulationPath"
+                         class="simulation-path">
+                    </div>
+
+
+                    <div class="result-grid">
+
+                        <div id="m1Result" class="result-box">
+                        </div>
+
+                        <div id="m2Result" class="result-box">
+                        </div>
+
+                        <div id="unionResult" class="result-box">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            Regular Union Engine • Theory of Computation • TAE Model
+        </p>
+
+        <p>
+            Cross-Product DFA | Parallel State Transitions | Regular Language Union
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
