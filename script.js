@@ -14,220 +14,118 @@ let unionDFA = null;
 
 // ================= DFA PROBLEM TYPE =================
 
+// ================= MIXED DFA PROBLEM TYPES =================
 
-const problemTypeSelect =
-    document.getElementById("problemType");
+const dfa1ProblemType =
+    document.getElementById("dfa1ProblemType");
 
-const problemTypeInfo =
-    document.getElementById("problemTypeInfo");
+const dfa2ProblemType =
+    document.getElementById("dfa2ProblemType");
 
-const selectedProblemText =
-    document.getElementById("selectedProblemText");
+const dfa1ProblemInput =
+    document.getElementById("dfa1ProblemInput");
 
-const customProblemInput =
-    document.getElementById("customProblemInput");
+const dfa2ProblemInput =
+    document.getElementById("dfa2ProblemInput");
 
-const inputLabel1 =
-    document.getElementById("inputLabel1");
+const dfa1ProblemHelp =
+    document.getElementById("dfa1ProblemHelp");
 
-const inputLabel2 =
-    document.getElementById("inputLabel2");
-
-const problemInput1 =
-    document.getElementById("problemInput1");
-
-const problemInput2 =
-    document.getElementById("problemInput2");
-
-const problemInputHelp =
-    document.getElementById("problemInputHelp");
+const dfa2ProblemHelp =
+    document.getElementById("dfa2ProblemHelp");
 
 
-if (problemTypeSelect) {
+function setupProblemInput(typeSelect, input, help, useDefault = false) {
 
-    problemTypeSelect.addEventListener("change", function () {
+    const type = typeSelect.value;
 
-        const selectedOption =
-            problemTypeSelect.options[
-                problemTypeSelect.selectedIndex
-            ];
+    if (type === "") {
 
-        const type =
-            problemTypeSelect.value;
+        input.value = "";
+        input.placeholder = "Select a problem type first";
+        help.textContent = "";
 
+        return;
+    }
 
-        // Show selected problem
-
-        if (type === "") {
-
-            problemTypeInfo.classList.add("hidden");
-
-            selectedProblemText.textContent = "";
-
-            customProblemInput.classList.add("hidden");
-
-            return;
+    const defaults = {
+        "decimal-divisible": {
+            value: "3",
+            placeholder: "Example: 3",
+            help: "Enter the decimal divisor."
+        },
+        "binary-divisible": {
+            value: "2",
+            placeholder: "Example: 2",
+            help: "Enter the divisor for binary numbers."
+        },
+        "starts-with": {
+            value: "10",
+            placeholder: "Example: 10",
+            help: "Enter the starting string."
+        },
+        "ends-with": {
+            value: "01",
+            placeholder: "Example: 01",
+            help: "Enter the ending string."
+        },
+        "substring": {
+            value: "101",
+            placeholder: "Example: 101",
+            help: "Enter the substring."
+        },
+        "even-odd": {
+            value: "Even number of 1s",
+            placeholder: "Example: Even number of 1s",
+            help: "Enter the condition, e.g. Even number of 1s or Odd number of 1s."
         }
+    };
 
+    const config = defaults[type];
 
-        selectedProblemText.textContent =
-            selectedOption.text;
+    if (!config) {
+        input.value = "";
+        input.placeholder = "Select a problem type first";
+        help.textContent = "";
+        return;
+    }
 
-        problemTypeInfo.classList.remove("hidden");
+    if (useDefault || !input.value.trim()) {
+        input.value = config.value;
+    }
 
-        customProblemInput.classList.remove("hidden");
+    input.placeholder = config.placeholder;
+    help.textContent = config.help;
 
+}
 
-        // Decimal Divisibility
 
-        if (type === "decimal-divisible") {
+if (dfa1ProblemType) {
 
-            inputLabel1.textContent =
-                "DFA 1 Divisor";
+    dfa1ProblemType.addEventListener("change", function () {
 
-            inputLabel2.textContent =
-                "DFA 2 Divisor";
+        setupProblemInput(
+            dfa1ProblemType,
+            dfa1ProblemInput,
+            dfa1ProblemHelp,
+            true
+        );
 
-            problemInput1.value = "3";
+    });
 
-            problemInput2.value = "5";
+}
 
-            problemInput1.placeholder =
-                "Example: 3";
 
-            problemInput2.placeholder =
-                "Example: 5";
+if (dfa2ProblemType) {
 
-            problemInputHelp.textContent =
-                "Enter two decimal divisors. Example: 3 and 5.";
-        }
+    dfa2ProblemType.addEventListener("change", function () {
 
-
-        // Binary Divisibility
-
-        else if (type === "binary-divisible") {
-
-            inputLabel1.textContent =
-                "DFA 1 Divisor";
-
-            inputLabel2.textContent =
-                "DFA 2 Divisor";
-
-            problemInput1.value = "2";
-
-            problemInput2.value = "3";
-
-            problemInput1.placeholder =
-                "Example: 2";
-
-            problemInput2.placeholder =
-                "Example: 3";
-
-            problemInputHelp.textContent =
-                "Enter two decimal divisors for binary numbers. Example: 2 and 3.";
-        }
-
-
-        // Starting String
-
-        else if (type === "starts-with") {
-
-            inputLabel1.textContent =
-                "DFA 1 Starting String";
-
-            inputLabel2.textContent =
-                "DFA 2 Starting String";
-
-            problemInput1.value = "10";
-
-            problemInput2.value = "11";
-
-            problemInput1.placeholder =
-                "Example: 10";
-
-            problemInput2.placeholder =
-                "Example: 11";
-
-            problemInputHelp.textContent =
-                "Enter the strings that the DFA should start with.";
-        }
-
-
-        // Ending String
-
-        else if (type === "ends-with") {
-
-            inputLabel1.textContent =
-                "DFA 1 Ending String";
-
-            inputLabel2.textContent =
-                "DFA 2 Ending String";
-
-            problemInput1.value = "01";
-
-            problemInput2.value = "10";
-
-            problemInput1.placeholder =
-                "Example: 01";
-
-            problemInput2.placeholder =
-                "Example: 10";
-
-            problemInputHelp.textContent =
-                "Enter the strings that the DFA should end with.";
-        }
-
-
-        // Substring
-
-        else if (type === "substring") {
-
-            inputLabel1.textContent =
-                "DFA 1 Substring";
-
-            inputLabel2.textContent =
-                "DFA 2 Substring";
-
-            problemInput1.value = "101";
-
-            problemInput2.value = "110";
-
-            problemInput1.placeholder =
-                "Example: 101";
-
-            problemInput2.placeholder =
-                "Example: 110";
-
-            problemInputHelp.textContent =
-                "Enter two substrings that should occur in the input.";
-        }
-
-
-        // Even / Odd
-
-        else if (type === "even-odd") {
-
-            inputLabel1.textContent =
-                "DFA 1 Condition";
-
-            inputLabel2.textContent =
-                "DFA 2 Condition";
-
-            problemInput1.value =
-                "Even number of 1s";
-
-            problemInput2.value =
-                "Odd number of 1s";
-
-            problemInput1.placeholder =
-                "Example: Even number of 1s";
-
-            problemInput2.placeholder =
-                "Example: Odd number of 1s";
-
-            problemInputHelp.textContent =
-                "This example uses even and odd number of 1s.";
-        }
+        setupProblemInput(
+            dfa2ProblemType,
+            dfa2ProblemInput,
+            dfa2ProblemHelp,
+            true
+        );
 
     });
 
@@ -398,172 +296,58 @@ function readDFA(prefix) {
     const transitionText =
         document.getElementById(prefix + "Transitions").value.trim();
 
-
-    /* ---------- BASIC VALIDATION ---------- */
-
-    if (states.length === 0) {
-
-        throw new Error(
-            `${prefix.toUpperCase()}: Please enter states.`
-        );
-
+    if (
+        states.length === 0 ||
+        alphabet.length === 0 ||
+        !startState ||
+        finalStates.length === 0 ||
+        !transitionText
+    ) {
+        throw new Error("Please complete all required DFA details.");
     }
-
-
-    if (alphabet.length === 0) {
-
-        throw new Error(
-            `${prefix.toUpperCase()}: Please enter alphabet.`
-        );
-
-    }
-
-
-    if (!startState) {
-
-        throw new Error(
-            `${prefix.toUpperCase()}: Please enter start state.`
-        );
-
-    }
-
-
-    if (finalStates.length === 0) {
-
-        throw new Error(
-            `${prefix.toUpperCase()}: Please enter at least one final state.`
-        );
-
-    }
-
 
     if (!states.includes(startState)) {
-
-        throw new Error(
-            `${prefix.toUpperCase()}: Start state "${startState}" is not present in states.`
-        );
-
+        throw new Error("Please complete all required DFA details.");
     }
-
 
     for (const finalState of finalStates) {
-
         if (!states.includes(finalState)) {
-
-            throw new Error(
-                `${prefix.toUpperCase()}: Final state "${finalState}" is not present in states.`
-            );
-
+            throw new Error("Please complete all required DFA details.");
         }
-
     }
-
-
-    /* ---------- TRANSITIONS ---------- */
-
-    if (!transitionText) {
-
-        throw new Error(
-            `${prefix.toUpperCase()}: Please enter transition rules.`
-        );
-
-    }
-
 
     const transitions = {};
-
-
     const lines =
         transitionText
             .split("\n")
             .map(line => line.trim())
             .filter(line => line.length > 0);
 
-
     for (const line of lines) {
-
-        const parts =
-            line.split(",").map(item => item.trim());
-
+        const parts = line.split(",").map(item => item.trim());
 
         if (parts.length !== 3) {
-
-            throw new Error(
-                `${prefix.toUpperCase()}: Invalid transition "${line}". Use: state,symbol,nextState`
-            );
-
+            throw new Error("Please provide all required transitions.");
         }
-
 
         const [currentState, symbol, nextState] = parts;
 
-
-        if (!states.includes(currentState)) {
-
-            throw new Error(
-                `${prefix.toUpperCase()}: Unknown state "${currentState}" in transition.`
-            );
-
+        if (
+            !states.includes(currentState) ||
+            !alphabet.includes(symbol) ||
+            !states.includes(nextState)
+        ) {
+            throw new Error("Please provide all required transitions.");
         }
 
-
-        if (!alphabet.includes(symbol)) {
-
-            throw new Error(
-                `${prefix.toUpperCase()}: Symbol "${symbol}" is not in the alphabet.`
-            );
-
-        }
-
-
-        if (!states.includes(nextState)) {
-
-            throw new Error(
-                `${prefix.toUpperCase()}: Unknown next state "${nextState}".`
-            );
-
-        }
-
-
-        const key =
-            `${currentState}||${symbol}`;
-
+        const key = `${currentState}||${symbol}`;
 
         if (transitions[key]) {
-
-            throw new Error(
-                `${prefix.toUpperCase()}: Duplicate transition for ${currentState} with ${symbol}.`
-            );
-
+            throw new Error("Please provide all required transitions.");
         }
-
 
         transitions[key] = nextState;
-
     }
-
-
-    /* ---------- CHECK COMPLETE DFA ---------- */
-
-    for (const state of states) {
-
-        for (const symbol of alphabet) {
-
-            const key =
-                `${state}||${symbol}`;
-
-            if (!transitions[key]) {
-
-                throw new Error(
-                    `${prefix.toUpperCase()}: Missing transition for (${state}, ${symbol}).`
-                );
-
-            }
-
-        }
-
-    }
-
 
     return {
         states,
@@ -572,6 +356,19 @@ function readDFA(prefix) {
         finalStates,
         transitions
     };
+
+}
+
+function validateCompleteDFA(dfa) {
+
+    for (const state of dfa.states) {
+        for (const symbol of dfa.alphabet) {
+            const key = `${state}||${symbol}`;
+            if (!Object.prototype.hasOwnProperty.call(dfa.transitions, key)) {
+                throw new Error("Please provide all required transitions.");
+            }
+        }
+    }
 
 }
 
@@ -756,6 +553,12 @@ function displayProductStates() {
 
 
     productCalculationElement.innerHTML = `
+        <strong>
+            DFA 1 Total States: ${dfa1.states.length}
+            &nbsp;|&nbsp;
+            DFA 2 Total States: ${dfa2.states.length}
+        </strong>
+        <br><br>
         <strong>
             Q₁ × Q₂ = ${dfa1.states.length} × ${dfa2.states.length}
             = ${states.length} product states
@@ -1148,34 +951,31 @@ function generateDFADiagram() {
             const dx = x2 - x1;
             const dy = y2 - y1;
 
-
             const distance =
                 Math.sqrt(dx * dx + dy * dy);
 
+            let offsetX = 0;
+            let offsetY = 0;
+            let startX = x1;
+            let startY = y1;
+            let endX = x2;
+            let endY = y2;
 
-            const offsetX =
-                (dx / distance) * 65;
+            if (distance > 0) {
+                offsetX = (dx / distance) * 65;
+                offsetY = (dy / distance) * 25;
 
-
-            const offsetY =
-                (dy / distance) * 25;
-
-
-            const startX =
-                x1 + offsetX;
-
-
-            const startY =
-                y1 + offsetY;
-
-
-            const endX =
-                x2 - offsetX;
-
-
-            const endY =
-                y2 - offsetY;
-
+                startX = x1 + offsetX;
+                startY = y1 + offsetY;
+                endX = x2 - offsetX;
+                endY = y2 - offsetY;
+            }
+            else {
+                startX = x1 + 18;
+                startY = y1 - 10;
+                endX = x2 + 18;
+                endY = y2 - 10;
+            }
 
             const middleX =
                 (startX + endX) / 2;
@@ -1682,52 +1482,143 @@ function normalizeGeneratedDFA(dfa, prefix) {
    ===================================================== */
 // ================= AUTOMATIC DFA GENERATION =================
 
-function createDFAFromProblem(type, value1, value2) {
+// ================= CREATE SINGLE DFA =================
+
+function createDFAFromSingleProblem(type, value, alphabet) {
+
+    if (!type) {
+        throw new Error("Please select a problem type for both DFAs.");
+    }
+
+    if (!value) {
+        throw new Error("Please enter input for both DFAs.");
+    }
+
+
+    // ---------- DECIMAL DIVISIBILITY ----------
 
     if (type === "decimal-divisible") {
-        return {
-            dfa1: createDivisibilityDFA(10, parseInt(value1)),
-            dfa2: createDivisibilityDFA(10, parseInt(value2))
-        };
+
+        if (
+            alphabet.length !== 10 ||
+            alphabet.join(",") !==
+            "0,1,2,3,4,5,6,7,8,9"
+        ) {
+            throw new Error(
+                "Decimal Number Divisible requires alphabet {0,1,2,3,4,5,6,7,8,9}."
+            );
+        }
+
+        const divisor = parseInt(value);
+
+        return createDivisibilityDFA(10, divisor);
     }
+
+
+    // ---------- BINARY DIVISIBILITY ----------
 
     if (type === "binary-divisible") {
-        return {
-            dfa1: createDivisibilityDFA(2, parseInt(value1)),
-            dfa2: createDivisibilityDFA(2, parseInt(value2))
-        };
+
+        if (
+            alphabet.length !== 2 ||
+            alphabet.join(",") !== "0,1"
+        ) {
+            throw new Error(
+                "Binary Number Divisible requires alphabet {0,1}."
+            );
+        }
+
+        const divisor = parseInt(value);
+
+        return createDivisibilityDFA(2, divisor);
     }
+
+
+    // ---------- STARTING WITH ----------
 
     if (type === "starts-with") {
-        return {
-            dfa1: createStartsWithDFA(value1),
-            dfa2: createStartsWithDFA(value2)
-        };
+
+        if (
+            alphabet.length !== 2 ||
+            alphabet.join(",") !== "0,1"
+        ) {
+            throw new Error(
+                "Starting with a String requires alphabet {0,1}."
+            );
+        }
+
+        return createStartsWithDFA(value);
     }
+
+
+    // ---------- ENDING WITH ----------
 
     if (type === "ends-with") {
-        return {
-            dfa1: createEndsWithDFA(value1),
-            dfa2: createEndsWithDFA(value2)
-        };
+
+        if (
+            alphabet.length !== 2 ||
+            alphabet.join(",") !== "0,1"
+        ) {
+            throw new Error(
+                "Ending with a String requires alphabet {0,1}."
+            );
+        }
+
+        return createEndsWithDFA(value);
     }
+
+
+    // ---------- SUBSTRING ----------
 
     if (type === "substring") {
-        return {
-            dfa1: createSubstringDFA(value1),
-            dfa2: createSubstringDFA(value2)
-        };
+
+        if (
+            alphabet.length !== 2 ||
+            alphabet.join(",") !== "0,1"
+        ) {
+            throw new Error(
+                "Substring Problem requires alphabet {0,1}."
+            );
+        }
+
+        return createSubstringDFA(value);
     }
+
+
+    // ---------- EVEN / ODD ----------
 
     if (type === "even-odd") {
-        return {
-            dfa1: createEvenOddDFA(true),
-            dfa2: createEvenOddDFA(false)
-        };
+
+        if (
+            alphabet.length !== 2 ||
+            alphabet.join(",") !== "0,1"
+        ) {
+            throw new Error(
+                "Even / Odd Problem requires alphabet {0,1}."
+            );
+        }
+
+        const isEven =
+            value.toLowerCase().includes("even");
+
+        const isOdd =
+            value.toLowerCase().includes("odd");
+
+        if (!isEven && !isOdd) {
+            throw new Error(
+                "For Even / Odd Problem, enter 'Even number of 1s' or 'Odd number of 1s'."
+            );
+        }
+
+        return createEvenOddDFA(isEven);
     }
 
-    return null;
+
+    throw new Error(
+        "Invalid DFA problem type selected."
+    );
 }
+
 // ================= DIVISIBILITY DFA =================
 
 function createDivisibilityDFA(base, divisor) {
@@ -1959,107 +1850,101 @@ function createEvenOddDFA(isEven) {
         transitions: transitions
     };
 }
+/* =====================================================
+   MAIN GENERATE FUNCTION
+   ===================================================== */
+
 function generate() {
-        hideError();
+
+    hideError();
+
     try {
 
-        
+        const type1 = dfa1ProblemType.value;
+        const type2 = dfa2ProblemType.value;
 
-        const selectedType = problemTypeSelect ? problemTypeSelect.value : "";
+        if (!type1) {
+            throw new Error("Please select a problem type for DFA 1.");
+        }
 
-if (selectedType) {
+        if (!type2) {
+            throw new Error("Please select a problem type for DFA 2.");
+        }
 
-    const value1 = problemInput1.value.trim();
-    const value2 = problemInput2.value.trim();
+        const dfa1StateCount =
+            document.getElementById("dfa1StateCount").value.trim();
 
-    if (!value1 || !value2) {
-        throw new Error("Please enter both DFA problem values.");
-    }
+        const dfa2StateCount =
+            document.getElementById("dfa2StateCount").value.trim();
 
-    const generatedDFAs = createDFAFromProblem(
-        selectedType,
-        value1,
-        value2
-    );
+        if (!dfa1StateCount) {
+            throw new Error("Please enter the total number of states for DFA 1.");
+        }
 
-    dfa1 = normalizeGeneratedDFA(generatedDFAs.dfa1, "q");
-dfa2 = normalizeGeneratedDFA(generatedDFAs.dfa2, "p");
+        if (!dfa2StateCount) {
+            throw new Error("Please enter the total number of states for DFA 2.");
+        }
 
-} else {
+        const stateCount1 = Number(dfa1StateCount);
+        const stateCount2 = Number(dfa2StateCount);
 
-    // Original manual DFA input
-    dfa1 = readDFA("m1");
-    dfa2 = readDFA("m2");
-}
+        if (
+            !/^\d+$/.test(dfa1StateCount) ||
+            !/^\d+$/.test(dfa2StateCount) ||
+            !Number.isSafeInteger(stateCount1) ||
+            !Number.isSafeInteger(stateCount2) ||
+            stateCount1 <= 0 ||
+            stateCount2 <= 0
+        ) {
+            throw new Error("Total number of states must be a positive integer.");
+        }
+
+        dfa1 = readDFA("m1");
+        dfa2 = readDFA("m2");
+
+        if (dfa1.states.length !== stateCount1) {
+            throw new Error(
+                "Number of states entered for DFA 1 does not match the Total Number of States."
+            );
+        }
+
+        if (dfa2.states.length !== stateCount2) {
+            throw new Error(
+                "Number of states entered for DFA 2 does not match the Total Number of States."
+            );
+        }
 
         validateAlphabets();
+        validateCompleteDFA(dfa1);
+        validateCompleteDFA(dfa2);
 
-
-        /*
-            Generate cross-product DFA.
-        */
-
-        unionDFA =
-            generateUnionDFA();
-
-
-        /*
-            Display all steps.
-        */
+        unionDFA = generateUnionDFA();
 
         displayProductStates();
-
         displayParallelTransitions();
-
         displayFinalStates();
-
         displayUnionSummary();
-
         displayUnionTable();
-
         generateDFADiagram();
-
-
-        /*
-            Show result section.
-        */
 
         resultSection.classList.remove("hidden");
 
-
-        /*
-            Reset simulator.
-        */
-
         simulationResult.classList.add("hidden");
-
         document.getElementById("testString").value = "";
 
-
-        /*
-            Scroll to result.
-        */
-
         setTimeout(() => {
-
             resultSection.scrollIntoView({
                 behavior: "smooth"
             });
-
         }, 100);
 
     }
-
     catch (error) {
-
         resultSection.classList.add("hidden");
-
         showError(error.message);
-
     }
 
 }
-
 
 /* =====================================================
    LOAD EXAMPLE
@@ -2067,69 +1952,41 @@ dfa2 = normalizeGeneratedDFA(generatedDFAs.dfa2, "p");
 
 function loadExample() {
 
-    /*
-        DFA M1:
-        Accepts strings ending in 1.
-    */
+    dfa1ProblemType.value = "starts-with";
+    dfa1ProblemInput.value = "0";
+    setupProblemInput(dfa1ProblemType, dfa1ProblemInput, dfa1ProblemHelp);
 
-    document.getElementById("m1States").value =
-        "q0,q1";
-
-
-    document.getElementById("m1Alphabet").value =
-        "0,1";
-
-
-    document.getElementById("m1Start").value =
-        "q0";
-
-
-    document.getElementById("m1Final").value =
-        "q1";
-
-
+    document.getElementById("m1States").value = "q0,q1,dead";
+    document.getElementById("dfa1StateCount").value = "3";
+    document.getElementById("m1Alphabet").value = "0,1";
+    document.getElementById("m1Start").value = "q0";
+    document.getElementById("m1Final").value = "q1";
     document.getElementById("m1Transitions").value =
+        "q0,0,q1\n" +
+        "q0,1,dead\n" +
+        "q1,0,q1\n" +
+        "q1,1,q1\n" +
+        "dead,0,dead\n" +
+        "dead,1,dead";
 
-`q0,0,q0
-q0,1,q1
-q1,0,q0
-q1,1,q1`;
+    dfa2ProblemType.value = "ends-with";
+    dfa2ProblemInput.value = "0";
+    setupProblemInput(dfa2ProblemType, dfa2ProblemInput, dfa2ProblemHelp);
 
-
-    /*
-        DFA M2:
-        Accepts strings ending in 0.
-    */
-
-    document.getElementById("m2States").value =
-        "p0,p1";
-
-
-    document.getElementById("m2Alphabet").value =
-        "0,1";
-
-
-    document.getElementById("m2Start").value =
-        "p0";
-
-
-    document.getElementById("m2Final").value =
-        "p1";
-
-
+    document.getElementById("m2States").value = "p0,p1";
+    document.getElementById("dfa2StateCount").value = "2";
+    document.getElementById("m2Alphabet").value = "0,1";
+    document.getElementById("m2Start").value = "p0";
+    document.getElementById("m2Final").value = "p1";
     document.getElementById("m2Transitions").value =
-
-`p0,0,p1
-p0,1,p0
-p1,0,p1
-p1,1,p0`;
-
+        "p0,0,p1\n" +
+        "p0,1,p0\n" +
+        "p1,0,p1\n" +
+        "p1,1,p0";
 
     hideError();
-
-
     resultSection.classList.add("hidden");
-
+    simulationResult.classList.add("hidden");
 
     window.scrollTo({
         top: 0,
@@ -2138,39 +1995,35 @@ p1,1,p0`;
 
 }
 
-
 /* =====================================================
    RESET APPLICATION
    ===================================================== */
 
 function resetApplication() {
 
-    const inputs =
-        document.querySelectorAll(
-            "input, textarea"
-        );
+    const selects = document.querySelectorAll("select");
+    const fields = document.querySelectorAll("input, textarea");
 
-
-    inputs.forEach(input => {
-
-        input.value = "";
-
+    selects.forEach(select => {
+        select.value = "";
     });
 
+    fields.forEach(field => {
+        field.value = "";
+    });
 
     dfa1 = null;
-
     dfa2 = null;
-
     unionDFA = null;
 
+    dfa1ProblemHelp.textContent = "";
+    dfa2ProblemHelp.textContent = "";
+    dfa1ProblemInput.placeholder = "Select a problem type first";
+    dfa2ProblemInput.placeholder = "Select a problem type first";
 
     resultSection.classList.add("hidden");
-
     simulationResult.classList.add("hidden");
-
     hideError();
-
 
     window.scrollTo({
         top: 0,

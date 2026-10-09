@@ -68,104 +68,181 @@
             </div>
         </section>
 
-<!-- ================= DFA PROBLEM TYPE ================= -->
+<!-- ================= DFA PROBLEM TYPE SELECTION ================= -->
 
-<section class="problem-type-card">
+<section class="problem-selection-card">
 
     <div class="section-heading">
         <div>
-            <p class="step-number">STEP 00</p>
-            <h2>Select DFA Problem Type</h2>
+            <p class="step-number">STEP 01</p>
+            <h2>Select DFA Problem Types</h2>
             <p>
-                Select the type of DFA problem you want to solve using
-                the Regular Union Engine.
+                Select a problem type separately for DFA 1 and DFA 2.
+                Both DFAs must use the same alphabet.
             </p>
         </div>
     </div>
 
-    <div class="problem-type-content">
 
-        <label for="problemType">Choose Problem Type</label>
+    <div class="dfa-type-grid">
 
-        <select id="problemType">
-            <option value="">-- Select a Problem Type --</option>
+        <!-- ================= DFA 1 ================= -->
 
-            <option value="decimal-divisible">
-                1. Decimal Number Divisible by Decimal Number
-            </option>
+        <div class="problem-dfa-box">
 
-            <option value="binary-divisible">
-                2. Binary Number Divisible by Decimal Number
-            </option>
+            <h3>DFA 1</h3>
 
-            <option value="starts-with">
-                3. Starting with a String Problem
-            </option>
+            <label for="dfa1ProblemType">
+                Problem Type
+            </label>
 
-            <option value="ends-with">
-                4. Ending with a String Problem
-            </option>
+            <select id="dfa1ProblemType">
 
-            <option value="substring">
-                5. Substring Problem
-            </option>
+                <option value="">
+                    Select DFA 1 Problem Type
+                </option>
 
-            <option value="even-odd">
-                6. Even / Odd Problem
-            </option>
+                <option value="decimal-divisible">
+                    Decimal Number Divisible by Decimal Number
+                </option>
 
-        </select>
+                <option value="binary-divisible">
+                    Binary Number Divisible by Decimal Number
+                </option>
 
-        <div id="problemTypeInfo" class="problem-type-info hidden">
-            <strong>Selected Problem:</strong>
-            <span id="selectedProblemText"></span>
-        </div>
-<div id="customProblemInput" class="custom-problem-input hidden">
+                <option value="starts-with">
+                    Starting with a String Problem
+                </option>
 
-    <div class="problem-input-grid">
+                <option value="ends-with">
+                    Ending with a String Problem
+                </option>
 
-        <div>
-            <label id="inputLabel1" for="problemInput1">
+                <option value="substring">
+                    Substring Problem
+                </option>
+
+                <option value="even-odd">
+                    Even / Odd Problem
+                </option>
+
+            </select>
+
+
+            <label for="dfa1ProblemInput">
                 DFA 1 Input
             </label>
 
             <input
                 type="text"
-                id="problemInput1"
-                placeholder="Enter value"
+                id="dfa1ProblemInput"
+                placeholder="Select a problem type first"
             >
+
+            <p
+                id="dfa1ProblemHelp"
+                class="input-help"
+            ></p>
+
+            <label for="dfa1StateCount">
+                Total Number of States
+            </label>
+
+            <input
+                type="text"
+                id="dfa1StateCount"
+                inputmode="numeric"
+                placeholder="Example: 3"
+            >
+
         </div>
 
-        <div>
-            <label id="inputLabel2" for="problemInput2">
+
+        <!-- ================= DFA 2 ================= -->
+
+        <div class="problem-dfa-box">
+
+            <h3>DFA 2</h3>
+
+            <label for="dfa2ProblemType">
+                Problem Type
+            </label>
+
+            <select id="dfa2ProblemType">
+
+                <option value="">
+                    Select DFA 2 Problem Type
+                </option>
+
+                <option value="decimal-divisible">
+                    Decimal Number Divisible by Decimal Number
+                </option>
+
+                <option value="binary-divisible">
+                    Binary Number Divisible by Decimal Number
+                </option>
+
+                <option value="starts-with">
+                    Starting with a String Problem
+                </option>
+
+                <option value="ends-with">
+                    Ending with a String Problem
+                </option>
+
+                <option value="substring">
+                    Substring Problem
+                </option>
+
+                <option value="even-odd">
+                    Even / Odd Problem
+                </option>
+
+            </select>
+
+
+            <label for="dfa2ProblemInput">
                 DFA 2 Input
             </label>
 
             <input
                 type="text"
-                id="problemInput2"
-                placeholder="Enter value"
+                id="dfa2ProblemInput"
+                placeholder="Select a problem type first"
             >
+
+            <p
+                id="dfa2ProblemHelp"
+                class="input-help"
+            ></p>
+
+            <label for="dfa2StateCount">
+                Total Number of States
+            </label>
+
+            <input
+                type="text"
+                id="dfa2StateCount"
+                inputmode="numeric"
+                placeholder="Example: 2"
+            >
+
         </div>
 
     </div>
 
-    <p id="problemInputHelp" class="input-help"></p>
-
-</div>
-    </div>
-
 </section>
+
         <!-- ================= INPUT SECTION ================= -->
 
         <section class="section-heading">
 
             <div>
-                <p class="step-number">STEP 01</p>
-                <h2>Enter the Two DFAs</h2>
+                <p class="step-number">STEP 02</p>
+                <h2>Enter DFA Details</h2>
                 <p>
-                    Enter the states, alphabet, start state, final states and
-                    transition rules of both DFAs.
+                    Enter the complete DFA details manually. Both DFAs must use
+                    the same alphabet.
                 </p>
             </div>
 
@@ -183,10 +260,10 @@
             <section class="dfa-card">
 
                 <div class="dfa-title">
-                    <div class="dfa-icon m1-icon">M1</div>
+                    <div class="dfa-icon m1-icon">1</div>
 
                     <div>
-                        <h2>DFA M1</h2>
+                        <h3>DFA 1</h3>
                         <p>First Regular Language</p>
                     </div>
                 </div>
@@ -264,10 +341,10 @@ q1,1,q1"
             <section class="dfa-card">
 
                 <div class="dfa-title">
-                    <div class="dfa-icon m2-icon">M2</div>
+                    <div class="dfa-icon m2-icon">2</div>
 
                     <div>
-                        <h2>DFA M2</h2>
+                        <h3>DFA 2</h3>
                         <p>Second Regular Language</p>
                     </div>
                 </div>
@@ -366,12 +443,12 @@ p1,1,p0"
 
         <section id="resultSection" class="hidden">
 
-            <!-- ================= STEP 02 ================= -->
+            <!-- ================= STEP 03 ================= -->
 
             <section class="result-card">
 
                 <div class="section-label">
-                    STEP 02
+                    STEP 03
                 </div>
 
                 <h2>Cross-Product States</h2>
@@ -390,12 +467,12 @@ p1,1,p0"
             </section>
 
 
-            <!-- ================= STEP 03 ================= -->
+            <!-- ================= STEP 04 ================= -->
 
             <section class="result-card">
 
                 <div class="section-label">
-                    STEP 03
+                    STEP 04
                 </div>
 
                 <h2>Parallel State Transitions</h2>
@@ -429,12 +506,12 @@ p1,1,p0"
             </section>
 
 
-            <!-- ================= STEP 04 ================= -->
+            <!-- ================= STEP 05 ================= -->
 
             <section class="result-card">
 
                 <div class="section-label">
-                    STEP 04
+                    STEP 05
                 </div>
 
                 <h2>Union Final States</h2>
@@ -457,12 +534,12 @@ p1,1,p0"
             </section>
 
 
-            <!-- ================= STEP 05 ================= -->
+            <!-- ================= STEP 06 ================= -->
 
             <section class="result-card">
 
                 <div class="section-label">
-                    STEP 05
+                    STEP 06
                 </div>
 
                 <h2>Generated Union DFA</h2>
@@ -520,12 +597,12 @@ p1,1,p0"
             </section>
 
 
-            <!-- ================= STEP 06 ================= -->
+            <!-- ================= STEP 07 ================= -->
 
             <section class="result-card simulator-card">
 
                 <div class="section-label">
-                    STEP 06
+                    STEP 07
                 </div>
 
                 <h2>String Simulator</h2>

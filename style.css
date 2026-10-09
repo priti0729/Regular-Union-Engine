@@ -966,3 +966,54 @@ footer p:first-child {
         grid-template-columns: 1fr;
     }
 }
+/* ================= MIXED DFA TYPE SELECTION ================= */
+
+.problem-selection-card {
+    margin-bottom: 30px;
+}
+
+.dfa-type-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.problem-dfa-box {
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+}
+
+.problem-dfa-box h3 {
+    margin-top: 0;
+    margin-bottom: 18px;
+}
+
+.problem-dfa-box select,
+.problem-dfa-box input,
+.common-alphabet-box input {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.common-alphabet-box {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+}
+
+.common-alphabet-box input {
+    margin-top: 8px;
+}
+
+@media (max-width: 700px) {
+
+    .dfa-type-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
